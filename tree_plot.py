@@ -3,6 +3,7 @@
 import sys, json, argparse
 from flask import Flask
 from flask import render_template
+from utils import convert_to_json
 
 # python version check
 if sys.version[0] == "2":
@@ -23,8 +24,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    with open(args.data) as fd:
-        tree_data = json.load(fd)
+    tree_data = convert_to_json(args.data)
     return render_template("index.html", tree_data=tree_data, title=args.title)
 
 if __name__  ==  '__main__':
